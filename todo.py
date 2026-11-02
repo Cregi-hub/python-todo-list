@@ -36,8 +36,31 @@ while True:
                     else:
                         task_status = "[X]"
                     print(f'{count}. {task_status} {task["description"]}')
+
             case 3:
-                print("Feature not implemented yet")
+                if not tasks:
+                    print("No tasks found")
+                    continue
+                print("===== YOUR TASKS =====")
+                for count, task in enumerate(tasks, 1):
+                    if not task["completed"]:
+                        task_status = "[ ]"
+                    else:
+                        task_status = "[X]"
+                    print(f'{count}. {task_status} {task["description"]}')
+                try:
+                    task_completion = int(input("Choose task to complete: "))
+                    if 1 <= task_completion <= len(tasks):
+                        if not tasks[task_completion - 1]["completed"]:
+                            tasks[task_completion - 1]["completed"] = True
+                            print("Task completed successfully!")
+                        else:
+                            print("This task is already completed!")
+                    else:
+                        print("Invalid task number!")
+                except ValueError:
+                    print("Invalid input!")
+
             case 4:
                 print("Feature not implemented yet")
             case 5:
