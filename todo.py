@@ -1,9 +1,19 @@
+def display_tasks(task_list):
+    if not task_list:
+        print("No tasks found")
+        return
+    for count, task in enumerate(task_list, 1):
+        if not task["completed"]:
+            task_status = "[ ]"
+        else:
+            task_status = "[X]"
+        print(f'{count}. {task_status} {task["description"]}')
+
 # Placeholder to store the tasks for now, before JSON implementation
 tasks = []
 
 while True:
     print("===== TO-DO LIST =====")
-
     print(
 '''
 1. Add task
@@ -27,27 +37,12 @@ while True:
                 print("Task added successfully!")
 
             case 2:
-                if not tasks:
-                    print("No tasks found")
-                    continue
-                for count, task in enumerate(tasks, 1):
-                    if not task["completed"]:
-                        task_status = "[ ]"
-                    else:
-                        task_status = "[X]"
-                    print(f'{count}. {task_status} {task["description"]}')
+                display_tasks(tasks)
 
             case 3:
+                display_tasks(tasks)
                 if not tasks:
-                    print("No tasks found")
                     continue
-                print("===== YOUR TASKS =====")
-                for count, task in enumerate(tasks, 1):
-                    if not task["completed"]:
-                        task_status = "[ ]"
-                    else:
-                        task_status = "[X]"
-                    print(f'{count}. {task_status} {task["description"]}')
                 try:
                     task_completion = int(input("Choose task to complete: "))
                     if 1 <= task_completion <= len(tasks):
@@ -62,16 +57,9 @@ while True:
                     print("Invalid input!")
 
             case 4:
+                display_tasks(tasks)
                 if not tasks:
-                    print("No tasks found")
                     continue
-                print("===== YOUR TASKS =====")
-                for count, task in enumerate(tasks, 1):
-                    if not task["completed"]:
-                        task_status = "[ ]"
-                    else:
-                        task_status = "[X]"
-                    print(f'{count}. {task_status} {task["description"]}')
                 try:
                     task_delete = int(input("Choose a task to delete: "))
                     if 1 <= task_delete <= len(tasks):
