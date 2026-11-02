@@ -25,8 +25,17 @@ while True:
                 task = {"description": user_task.strip(), "completed": False}
                 tasks.append(task)
                 print("Task added successfully!")
+
             case 2:
-                print(tasks)
+                if not tasks:
+                    print("No tasks found")
+                    continue
+                for count, task in enumerate(tasks, 1):
+                    if not task["completed"]:
+                        task_status = "[ ]"
+                    else:
+                        task_status = "[X]"
+                    print(f'{count}. {task_status} {task["description"]}')
             case 3:
                 print("Feature not implemented yet")
             case 4:
