@@ -1,3 +1,6 @@
+# Placeholder to store the tasks for now, before JSON implementation
+tasks = []
+
 while True:
     print("===== TO-DO LIST =====")
 
@@ -15,9 +18,15 @@ while True:
 
         match user_choice:
             case 1:
-                print("Feature not implemented yet")
+                user_task = input("What is the task: ")
+                if not user_task.strip():
+                    print("Input cannot be empty or only whitespace!")
+                    continue
+                task = {"description": user_task.strip(), "completed": False}
+                tasks.append(task)
+                print("Task added successfully!")
             case 2:
-                print("Feature not implemented yet")
+                print(tasks)
             case 3:
                 print("Feature not implemented yet")
             case 4:
