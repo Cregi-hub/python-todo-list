@@ -62,7 +62,25 @@ while True:
                     print("Invalid input!")
 
             case 4:
-                print("Feature not implemented yet")
+                if not tasks:
+                    print("No tasks found")
+                    continue
+                print("===== YOUR TASKS =====")
+                for count, task in enumerate(tasks, 1):
+                    if not task["completed"]:
+                        task_status = "[ ]"
+                    else:
+                        task_status = "[X]"
+                    print(f'{count}. {task_status} {task["description"]}')
+                try:
+                    task_delete = int(input("Choose a task to delete: "))
+                    if 1 <= task_delete <= len(tasks):
+                        tasks.pop(task_delete - 1)
+                        print("Task deleted successfully!")
+                    else:
+                        print("Invalid task number!")
+                except ValueError:
+                    print("Invalid input!")
             case 5:
                 print("Goodbye!")
                 break
