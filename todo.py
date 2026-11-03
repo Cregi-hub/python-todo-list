@@ -29,7 +29,8 @@ def display_tasks(task_list):
             task_status = "[ ]"
         else:
             task_status = "[X]"
-        print(f'{count}. {task_status} {task["description"]}')
+        priority = task.get("priority", "Medium")
+        print(f'{count}. {task_status} [{priority.upper()}] -> {task["description"]}')
 
 
 def add_task(task_list):
