@@ -39,19 +39,35 @@ def complete_task(task_list):
     except ValueError:
         print("Invalid input!")
 
+
+def delete_task(task_list):
+    display_tasks(task_list)
+    if not task_list:
+        return
+    try:
+        task_delete = int(input("Choose a task to delete: "))
+        if 1 <= task_delete <= len(task_list):
+            task_list.pop(task_delete - 1)
+            print("Task deleted successfully!")
+        else:
+            print("Invalid task number!")
+    except ValueError:
+        print("Invalid input!")
+
+
 # Placeholder to store the tasks for now, before JSON implementation
 tasks = []
 
 while True:
     print("===== TO-DO LIST =====")
     print(
-'''
-1. Add task
-2. View tasks
-3. Complete task
-4. Delete task
-5. Exit
-'''
+        '''
+        1. Add task
+        2. View tasks
+        3. Complete task
+        4. Delete task
+        5. Exit
+        '''
     )
     try:
         user_choice = int(input("Choose an option: "))
@@ -64,18 +80,7 @@ while True:
             case 3:
                 complete_task(tasks)
             case 4:
-                display_tasks(tasks)
-                if not tasks:
-                    continue
-                try:
-                    task_delete = int(input("Choose a task to delete: "))
-                    if 1 <= task_delete <= len(tasks):
-                        tasks.pop(task_delete - 1)
-                        print("Task deleted successfully!")
-                    else:
-                        print("Invalid task number!")
-                except ValueError:
-                    print("Invalid input!")
+                delete_task(tasks)
             case 5:
                 print("Goodbye!")
                 break
