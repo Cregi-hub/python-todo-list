@@ -33,14 +33,34 @@ def display_tasks(task_list):
 
 
 def add_task(task_list):
+    priorities = {
+        1: "Low",
+        2: "Medium",
+        3: "High"
+    }
     user_task = input("What is the task: ")
     if not user_task.strip():
         print("Input cannot be empty or only whitespace!")
         return
-    task = {"description": user_task.strip(), "completed": False}
-    task_list.append(task)
-    save_tasks(task_list)
-    print("Task added successfully!")
+
+    print("===== CHOOSE PRIORITY =====")
+    for count, item in priorities.items():
+        print(f"{count}. {item}")
+    try:
+        task_priority = int(input("Choose priority: "))
+        if task_priority in priorities:
+            task = {
+                "description": user_task.strip(),
+                "completed": False,
+                "priority": priorities[task_priority]
+            }
+            task_list.append(task)
+            save_tasks(task_list)
+            print("Task added successfully!")
+        else:
+            print("Invalid priority!")
+    except ValueError:
+        print("Invalid input!")
 
 
 def complete_task(task_list):
@@ -87,11 +107,11 @@ def main():
         print("===== TO-DO LIST =====")
         print(
             '''
-            1. Add task
-            2. View tasks
-            3. Complete task
-            4. Delete task
-            5. Exit
+1. Add task
+2. View tasks
+3. Complete task
+4. Delete task
+5. Exit
             '''
         )
         try:
