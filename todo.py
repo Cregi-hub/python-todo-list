@@ -19,6 +19,26 @@ def add_task(task_list):
     task_list.append(task)
     print("Task added successfully!")
 
+
+def complete_task(task_list):
+    display_tasks(task_list)
+    if not task_list:
+        return
+    try:
+        task_completion = int(input("Choose task to complete: "))
+        if 1 <= task_completion <= len(task_list):
+            selected_task = task_list[task_completion - 1]
+
+            if not selected_task["completed"]:
+                selected_task["completed"] = True
+                print("Task completed successfully!")
+            else:
+                print("This task is already completed!")
+        else:
+            print("Invalid task number!")
+    except ValueError:
+        print("Invalid input!")
+
 # Placeholder to store the tasks for now, before JSON implementation
 tasks = []
 
@@ -39,27 +59,10 @@ while True:
         match user_choice:
             case 1:
                 add_task(tasks)
-
             case 2:
                 display_tasks(tasks)
-
             case 3:
-                display_tasks(tasks)
-                if not tasks:
-                    continue
-                try:
-                    task_completion = int(input("Choose task to complete: "))
-                    if 1 <= task_completion <= len(tasks):
-                        if not tasks[task_completion - 1]["completed"]:
-                            tasks[task_completion - 1]["completed"] = True
-                            print("Task completed successfully!")
-                        else:
-                            print("This task is already completed!")
-                    else:
-                        print("Invalid task number!")
-                except ValueError:
-                    print("Invalid input!")
-
+                complete_task(tasks)
             case 4:
                 display_tasks(tasks)
                 if not tasks:
