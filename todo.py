@@ -1,3 +1,25 @@
+import json
+
+
+def save_tasks(task_list):
+    with open("tasks.json", "w", encoding="utf-8") as file:
+        json.dump(task_list, file, indent=4)
+
+
+def load_tasks():
+    try:
+        with open("tasks.json", "r", encoding="utf-8") as file:
+            return json.load(file)
+    except FileNotFoundError:
+        return []
+    except json.JSONDecodeError:
+        print('''
+Error: Could not load tasks.json.
+The file may be corrupted.
+Application stopped to prevent data loss.''')
+        raise SystemExit(1)
+
+
 def display_tasks(task_list):
     if not task_list:
         print("No tasks found")
@@ -17,6 +39,7 @@ def add_task(task_list):
         return
     task = {"description": user_task.strip(), "completed": False}
     task_list.append(task)
+    save_tasks(task_list)
     print("Task added successfully!")
 
 
@@ -31,6 +54,7 @@ def complete_task(task_list):
 
             if not selected_task["completed"]:
                 selected_task["completed"] = True
+                save_tasks(task_list)
                 print("Task completed successfully!")
             else:
                 print("This task is already completed!")
@@ -48,6 +72,7 @@ def delete_task(task_list):
         task_delete = int(input("Choose a task to delete: "))
         if 1 <= task_delete <= len(task_list):
             task_list.pop(task_delete - 1)
+            save_tasks(task_list)
             print("Task deleted successfully!")
         else:
             print("Invalid task number!")
@@ -55,8 +80,7 @@ def delete_task(task_list):
         print("Invalid input!")
 
 
-# Placeholder to store the tasks for now, before JSON implementation
-tasks = []
+tasks = load_tasks()
 
 while True:
     print("===== TO-DO LIST =====")
