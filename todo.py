@@ -9,6 +9,16 @@ def display_tasks(task_list):
             task_status = "[X]"
         print(f'{count}. {task_status} {task["description"]}')
 
+
+def add_task(task_list):
+    user_task = input("What is the task: ")
+    if not user_task.strip():
+        print("Input cannot be empty or only whitespace!")
+        return
+    task = {"description": user_task.strip(), "completed": False}
+    task_list.append(task)
+    print("Task added successfully!")
+
 # Placeholder to store the tasks for now, before JSON implementation
 tasks = []
 
@@ -28,13 +38,7 @@ while True:
 
         match user_choice:
             case 1:
-                user_task = input("What is the task: ")
-                if not user_task.strip():
-                    print("Input cannot be empty or only whitespace!")
-                    continue
-                task = {"description": user_task.strip(), "completed": False}
-                tasks.append(task)
-                print("Task added successfully!")
+                add_task(tasks)
 
             case 2:
                 display_tasks(tasks)
