@@ -27,3 +27,23 @@ def test_add_task(monkeypatch):
     assert len(test_list) == 1
     assert test_list[0]["description"] == "Learn Python"
     assert test_list[0]["completed"] is False
+
+
+def test_add_empty_task(monkeypatch, capsys):
+    test_list = []
+    monkeypatch.setattr("builtins.input", lambda _: "")
+    monkeypatch.setattr("todo.save_tasks", lambda _: None)
+    add_task(test_list)
+    assert len(test_list) == 0
+    captured = capsys.readouterr()
+    assert "Input cannot be empty or only whitespace!\n" in captured.out
+
+
+def test_add_whitespace_task(monkeypatch, capsys):
+    test_list = []
+    monkeypatch.setattr("builtins.input", lambda _: "     ")
+    monkeypatch.setattr("todo.save_tasks", lambda _: None)
+    add_task(test_list)
+    assert len(test_list) == 0
+    captured = capsys.readouterr()
+    assert captured.out == "Input cannot be empty or only whitespace!\n"
