@@ -80,35 +80,40 @@ def delete_task(task_list):
         print("Invalid input!")
 
 
-tasks = load_tasks()
+def main():
+    tasks = load_tasks()
 
-while True:
-    print("===== TO-DO LIST =====")
-    print(
-        '''
-        1. Add task
-        2. View tasks
-        3. Complete task
-        4. Delete task
-        5. Exit
-        '''
-    )
-    try:
-        user_choice = int(input("Choose an option: "))
+    while True:
+        print("===== TO-DO LIST =====")
+        print(
+            '''
+            1. Add task
+            2. View tasks
+            3. Complete task
+            4. Delete task
+            5. Exit
+            '''
+        )
+        try:
+            user_choice = int(input("Choose an option: "))
 
-        match user_choice:
-            case 1:
-                add_task(tasks)
-            case 2:
-                display_tasks(tasks)
-            case 3:
-                complete_task(tasks)
-            case 4:
-                delete_task(tasks)
-            case 5:
-                print("Goodbye!")
-                break
-            case _:
-                print("Invalid option!")
-    except ValueError:
-        print("Invalid input!")
+            match user_choice:
+                case 1:
+                    add_task(tasks)
+                case 2:
+                    display_tasks(tasks)
+                case 3:
+                    complete_task(tasks)
+                case 4:
+                    delete_task(tasks)
+                case 5:
+                    print("Goodbye!")
+                    break
+                case _:
+                    print("Invalid option!")
+        except ValueError:
+            print("Invalid input!")
+
+
+if __name__ == "__main__":
+    main()
